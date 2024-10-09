@@ -1,36 +1,20 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Distribuição de Números</title>
+    <title>Solicitação de Números</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Distribuição de Números</h1>
-        <input type="text" id="username" placeholder="Digite seu nome">
-        
-        <label for="quantity">Quantidade de Números:</label>
-        <select id="quantity">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-        </select>
+    <h1>Solicitação de Números</h1>
+    <input type="text" id="username" placeholder="Digite seu nome">
+    <input type="number" id="quantity" placeholder="Quantidade de números">
+    <button id="requestNumber">Solicitar Números</button>
 
-        <button id="requestNumber">Pedir Números</button>
-        
-        <h2>Números Concedidos</h2>
-        <ul id="numberList"></ul>
-    </div>
-    
+    <h2>Números Concedidos</h2>
+    <ul id="numberList"></ul> <!-- Adiciona a lista aqui -->
+
     <script src="script.js"></script>
 </body>
 </html>
