@@ -6,6 +6,12 @@ const port = 3000;
 
 app.use(bodyParser.json());
 
+// Lê os números concedidos do arquivo JSON
+let grantedNumbers = [];
+if (fs.existsSync('grantedNumbers.json')) {
+    grantedNumbers = JSON.parse(fs.readFileSync('grantedNumbers.json', 'utf-8'));
+}
+
 // Rota para a raiz
 app.get('/', (req, res) => {
     res.send('Bem-vindo ao servidor! Use o endpoint /save-numbers para salvar números.');
@@ -15,19 +21,18 @@ app.get('/', (req, res) => {
 app.post('/save-numbers', (req, res) => {
     const data = req.body;
 
-    // Leia o arquivo JSON (ou crie um novo se não existir)
-    let fileData = [];
-    if (fs.existsSync('grantedNumbers.json')) {
-        fileData = JSON.parse(fs.readFileSync('grantedNumbers.json', 'utf-8'));
-    }
-
     // Adiciona o novo registro ao array
-    fileData.push(data);
+    grantedNumbers.push(data);
 
     // Escreve o arquivo atualizado
-    fs.writeFileSync('grantedNumbers.json', JSON.stringify(fileData, null, 2));
+    fs.writeFileSync('grantedNumbers.json', JSON.stringify(grantedNumbers, null, 2));
 
     res.status(200).send({ message: 'Números salvos com sucesso!' });
+});
+
+// Novo endpoint para obter números concedidos
+app.get('/get-numbers', (req, res) => {
+    res.status(200).json(grantedNumbers);
 });
 
 app.listen(port, () => {
