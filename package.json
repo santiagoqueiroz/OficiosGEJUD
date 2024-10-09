@@ -1,7 +1,7 @@
 {
   "name": "oficios2",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",  // Alterado para o arquivo correto
   "scripts": {
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,10 +9,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Um projeto para gerenciar números solicitados.",  // Adicione uma descrição
   "dependencies": {
     "body-parser": "^1.20.3",
-    "express": "^4.21.1",
-    "fs": "^0.0.1-security"
+    "express": "^4.21.1"
+    // "fs": "^0.0.1-security" - Removido, pois não é necessário
   }
 }
