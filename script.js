@@ -1,5 +1,4 @@
 const nextNumber = 1; // Inicializa com o primeiro número
-let grantedNumbers = [];
 
 document.getElementById('requestNumber').addEventListener('click', () => {
     const username = document.getElementById('username').value.trim();
@@ -22,13 +21,24 @@ document.getElementById('requestNumber').addEventListener('click', () => {
     }
 
     // Adiciona os números concedidos ao array de registros
-    grantedNumbers.push({ user: username, numbers: numbersToGrant });
+    const data = { user: username, numbers: numbersToGrant };
+    grantedNumbers.push(data);
 
     // Atualiza a lista na interface
     updateNumberList();
     document.getElementById('username').value = '';
+
+    // Enviar os números para o servidor
+    fetch('/save-numbers', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
 });
 
+// Função para atualizar a lista
 function updateNumberList() {
     const numberList = document.getElementById('numberList');
     numberList.innerHTML = ''; // Limpa a lista antes de atualizar
@@ -39,3 +49,16 @@ function updateNumberList() {
         numberList.appendChild(li);
     });
 }
+
+// Função para carregar os números já concedidos ao carregar a página
+function loadGrantedNumbers() {
+    fetch('/get-numbers')
+        .then(response => response.json())
+        .then(data => {
+            grantedNumbers = data; // Atualiza a lista com os números já concedidos
+            updateNumberList(); // Atualiza a interface
+        });
+}
+
+// Carregar os números ao iniciar a página
+loadGrantedNumbers();
