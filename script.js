@@ -22,12 +22,14 @@ document.getElementById('requestNumber').addEventListener('click', () => {
             numbersToGrant.push(nextNumber);
             nextNumber++;
         } else {
-            break;
+            break; // Para se não houver mais números disponíveis
         }
     }
 
+    // Adiciona os números concedidos ao array de registros
     grantedNumbers.push({ user: username, numbers: numbersToGrant });
 
+    // Atualiza a lista na interface
     updateNumberList();
     document.getElementById('username').value = '';
 });
