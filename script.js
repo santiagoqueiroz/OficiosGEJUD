@@ -3,7 +3,8 @@ let grantedNumbers = [];
 
 document.getElementById('requestNumber').addEventListener('click', () => {
     const username = document.getElementById('username').value.trim();
-    
+    const quantity = parseInt(document.getElementById('quantity').value);
+
     if (!username) {
         alert("Por favor, digite seu nome.");
         return;
@@ -14,10 +15,18 @@ document.getElementById('requestNumber').addEventListener('click', () => {
         return;
     }
 
-    const grantedNumber = nextNumber; // Concede o próximo número
-    grantedNumbers.push({ user: username, number: grantedNumber });
+    // Concede os números conforme a quantidade solicitada
+    const numbersToGrant = [];
+    for (let i = 0; i < quantity; i++) {
+        if (nextNumber <= 10000) {
+            numbersToGrant.push(nextNumber);
+            nextNumber++;
+        } else {
+            break;
+        }
+    }
 
-    nextNumber++; // Incrementa para o próximo número
+    grantedNumbers.push({ user: username, numbers: numbersToGrant });
 
     updateNumberList();
     document.getElementById('username').value = '';
@@ -29,7 +38,7 @@ function updateNumberList() {
 
     grantedNumbers.forEach(record => {
         const li = document.createElement('li');
-        li.textContent = `${record.user} recebeu o número ${record.number}`;
+        li.textContent = `${record.user} recebeu os números: ${record.numbers.join(', ')}`;
         numberList.appendChild(li);
     });
 }
