@@ -1,4 +1,4 @@
-let availableNumbers = Array.from({length: 10000}, (_, i) => i + 1);
+let nextNumber = 1; // Inicializa com o primeiro número
 let grantedNumbers = [];
 
 document.getElementById('requestNumber').addEventListener('click', () => {
@@ -9,16 +9,16 @@ document.getElementById('requestNumber').addEventListener('click', () => {
         return;
     }
 
-    if (availableNumbers.length === 0) {
+    if (nextNumber > 10000) {
         alert("Todos os números já foram solicitados.");
         return;
     }
 
-    const randomIndex = Math.floor(Math.random() * availableNumbers.length);
-    const grantedNumber = availableNumbers.splice(randomIndex, 1)[0];
-
+    const grantedNumber = nextNumber; // Concede o próximo número
     grantedNumbers.push({ user: username, number: grantedNumber });
-    
+
+    nextNumber++; // Incrementa para o próximo número
+
     updateNumberList();
     document.getElementById('username').value = '';
 });
